@@ -41,7 +41,7 @@ do
 	if [ $x -ge 3 ]
 	then
 		x=0
-		echo -e "\033[2K"
+		echo -en "\033[2K"
 		echo -en "Sleeping for zone to finish install"
 	fi
 
