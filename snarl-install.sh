@@ -1,4 +1,7 @@
-$PATH=/usr/local/sbin:/usr/local/bin:/opt/local/sbin:/opt/local/bin:/usr/sbin:/usr/bin:/sbin
+PATH=/usr/local/sbin:/usr/local/bin:/opt/local/sbin:/opt/local/bin:/usr/sbin:/usr/bin:/sbin
+export PATH
+
+
 /usr/sbin/zfs set mountpoint=/data zones/$(sysinfo | json UUID)/data
 
 /usr/bin/curl https://project-fifo.net/fifo.gpg > /root/fifo.gpg
@@ -8,4 +11,4 @@ $PATH=/usr/local/sbin:/usr/local/bin:/opt/local/sbin:/opt/local/bin:/usr/sbin:/u
 /opt/local/bin/pkgin -y install fifo-snarl
 /opt/local/bin/pkgin -yf ug
 
-/opt/local/bin/sm-prepare-image -y
+/opt/local/bin/sm-prepare-image < /opt/local/bin/yes
