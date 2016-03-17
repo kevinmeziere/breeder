@@ -1,3 +1,4 @@
+$PATH=/usr/local/sbin:/usr/local/bin:/opt/local/sbin:/opt/local/bin:/usr/sbin:/usr/bin:/sbin
 /usr/sbin/zfs set mountpoint=/data zones/$(sysinfo | json UUID)/data
 
 /usr/bin/curl https://project-fifo.net/fifo.gpg > /root/fifo.gpg
