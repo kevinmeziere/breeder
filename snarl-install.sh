@@ -1,8 +1,8 @@
 /usr/sbin/zfs set mountpoint=/data zones/$(sysinfo | json UUID)/data
 
 
-/usr/bin/curl -O https://project-fifo.net/fifo.gpg
-/usr/bin/gpg --primary-keyring /opt/local/etc/gnupg/pkgsrc.gpg --import < fifo.gpg
+/usr/bin/curl -O /root/fifo.gpg https://project-fifo.net/fifo.gpg
+/usr/bin/gpg --primary-keyring /opt/local/etc/gnupg/pkgsrc.gpg --import < /root/fifo.gpg
 /usr/bin/echo "http://release.project-fifo.net/pkg/rel" >> /opt/local/etc/pkgin/repositories.conf
 /opt/local/bin/pkgin -fy up
 /opt/local/bin/pkgin -y install fifo-snarl
