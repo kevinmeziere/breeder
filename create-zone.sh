@@ -4,10 +4,11 @@
 # cleanup with: vmadm list | grep fifo-build | awk {'print $1'} | xargs -n 1 vmadm delete
 
 
-
-InstallerZoneIP=$(echo $1 | tr '[:lower:]' '[:upper:]')
-InstallerZoneGW=$2
-InstallerZoneMASK=$3
+PackageName=$1
+PackageVersion$2
+InstallerZoneIP=$(echo $3 | tr '[:lower:]' '[:upper:]')
+InstallerZoneGW=$4
+InstallerZoneMASK=$5
 
 
 imgadm update
@@ -18,9 +19,9 @@ wget --no-check-certificate -O /opt/zone_definitions/ds_builder.json.tmp https:/
 
 if [ "$InstallerZoneIP" = "DHCP" ]
 then
-  sed "s/{{IP}}/dhcp/g;/{{GW}}/d;/{{MASK}}/d" /opt/zone_definitions/ds_builder.json.tmp > /opt/zone_definitions/ds_builder.json
+  sed "s/{{PACKAGENAME}}/$PackageName/g;s/{{PACKAGEVER}}/$PackageVersion/g;s/{{IP}}/dhcp/g;/{{GW}}/d;/{{MASK}}/d" /opt/zone_definitions/ds_builder.json.tmp > /opt/zone_definitions/ds_builder.json
 else
-  sed "s/{{IP}}/$InstallerZoneIP/g;s/{{GW}}/$InstallerZoneGW/g;s/{{MASK}}/$InstallerZoneMASK/g" /opt/zone_definitions/ds_builder.json.tmp > /opt/zone_definitions/ds_builder.json
+  sed "s/{{PACKAGENAME}}/$PackageName/g;s/{{PACKAGEVER}}/$PackageVersion/g;s/{{IP}}/$InstallerZoneIP/g;s/{{GW}}/$InstallerZoneGW/g;s/{{MASK}}/$InstallerZoneMASK/g" /opt/zone_definitions/ds_builder.json.tmp > /opt/zone_definitions/ds_builder.json
 fi
 
 echo "Creating temporary vm for installation..."
@@ -54,4 +55,5 @@ done
 
 echo -en "\nZone install done.\n"
 
-imgadm create -c bzip2 $VMUUID name=fifo-snarl version=0.8.0 -o /var/tmp
+
+imgadm create -i -c bzip2 $VMUUID name=fifo-$PackageName version=$PackageVersion -o /var/tmp

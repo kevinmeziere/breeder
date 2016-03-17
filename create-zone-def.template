@@ -3,12 +3,12 @@
  "brand": "joyent",
  "image_uuid": "1bd84670-055a-11e5-aaa2-0346bb21d5a1",
  "delegate_dataset": true,
- "max_physical_memory": 2048,
- "cpu_cap": 100,
- "alias": "fifo-build",
+ "max_physical_memory": 8192,
+ "cpu_cap": 400,
+ "alias": "breeder-{{PACKAGENAME}}",
  "quota": "10",
  "customer_metadata": {
-	    "user-script" : "/usr/bin/curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/snarl-install.sh?$(/usr/bin/date -R | /usr/bin/awk '{print $5}' | /usr/bin/sed 's/\\://g') | /usr/bin/bash > /opt/log 2>&1"
+	    "user-script" : "/usr/bin/curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/{{PACKAGENAME}}-install.sh?$(/usr/bin/date -R | /usr/bin/awk '{print $5}' | /usr/bin/sed 's/\\://g') | /usr/bin/bash -s "{{PACKAGEVER}}" > /opt/log 2>&1"
  },
  "resolvers": ["8.8.8.8", "8.8.4.4"],
  "nics": [
