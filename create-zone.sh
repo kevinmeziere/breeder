@@ -34,11 +34,10 @@ echo "Successfully created VM: $VMUUID"
 echo -en "Sleeping for zone to finish install"
 
 x=0
-vmState=$(vmadm get $VMUUID | json state)
 
-while [ $vmState != "stopped" ]
+while [ $(vmadm get $VMUUID | json state) != "stopped" ]
 do
-	if [ $x -ge 3 ]
+	if [ $x -ge 4 ]
 	then
 		x=0
 		echo -en "\033[2K\r"
