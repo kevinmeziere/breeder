@@ -5,7 +5,7 @@
 
 
 PackageName=$1
-PackageVersion$2
+PackageVersion=$2
 InstallerZoneIP=$(echo $3 | tr '[:lower:]' '[:upper:]')
 InstallerZoneGW=$4
 InstallerZoneMASK=$5
