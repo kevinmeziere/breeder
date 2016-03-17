@@ -1,6 +1,6 @@
 # To use:
 # curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/create-zone.sh | bash -s "10.10.10.10" "10.10.10.1" "255.255.255.0"
-#
+# curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/create-zone.sh?$(date -R | awk '{print $5}' | sed 's/\://g') | bash -s "DHCP"
 
 InstallerZoneIP=$(echo $1 | tr '[:lower:]' '[:upper:]')
 InstallerZoneGW=$2
@@ -31,11 +31,11 @@ fi
 
 echo "Successfully created VM: $VMUUID"
 
-echo -n "Sleeping for zone to finish install"
+echo -en "Sleeping for zone to finish install"
 
 x=0
 
-while [ $(vmadm get $VMUUID | json state) != "stopped" ]
+while [ `vmadm get $VMUUID | json state` != "stopped" ]
 do
 	if [ $x -ge 3 ]
 	then
