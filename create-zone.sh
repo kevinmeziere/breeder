@@ -35,6 +35,7 @@ echo -en "Sleeping for zone to finish install"
 
 x=0
 vmState=$(vmadm get $VMUUID | json state)
+
 while [ $vmState != "stopped" ]
 do
 	if [ $x -ge 3 ]
