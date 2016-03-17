@@ -27,3 +27,6 @@ if [ -z "$VMUUID" ]
 then
 	echo "Unable to create installer VM."
 	exit 1
+fi
+
+echo "Successfully created VM: $VMUUID"
