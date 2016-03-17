@@ -48,5 +48,6 @@ do
 	echo -n "."
 	((x++))
 done
-echo ""
-echo "Zone install done."
+
+echo -en "\nZone install done.\n"
+
