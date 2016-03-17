@@ -7,6 +7,9 @@
  "cpu_cap": 100,
  "alias": "fifo-build",
  "quota": "10",
+ "customer_metadata": {
+	    "user-script" : "/opt/local/bin/echo \"THIS IS A TEST\" > /root/test "
+ }
  "resolvers": ["8.8.8.8", "8.8.4.4"],
  "nics": [
 		{
