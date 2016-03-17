@@ -8,7 +8,7 @@ export PATH
 /usr/bin/gpg --primary-keyring /opt/local/etc/gnupg/pkgsrc.gpg --import < /root/fifo.gpg
 /usr/bin/echo "http://release.project-fifo.net/pkg/rel" >> /opt/local/etc/pkgin/repositories.conf
 /opt/local/bin/pkgin -fy up
-/opt/local/bin/pkgin -y install fifo-snarl
+/opt/local/bin/pkgin -y install fifo-snarl-0.8.0
 /opt/local/bin/pkgin -yf ug
 
 /opt/local/bin/sm-prepare-image -y

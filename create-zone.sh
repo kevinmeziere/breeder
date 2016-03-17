@@ -54,3 +54,4 @@ done
 
 echo -en "\nZone install done.\n"
 
+imgadm create -c bzip2 $VMUUID name=fifo-snarl version=0.8.0 -o /var/tmp
