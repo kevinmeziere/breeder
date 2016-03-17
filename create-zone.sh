@@ -30,3 +30,22 @@ then
 fi
 
 echo "Successfully created VM: $VMUUID"
+
+echo -n "Sleeping for zone to finish install"
+
+x=0
+
+while [ $(vmadm get $VMUUID | json state) != "stopped"]
+do
+	if [ $x -ge 3 ]
+	then
+		x=0
+		echo -en "\rSleeping for zone to finish install"
+	fi
+
+	sleep 2
+	echo -n "."
+	((x++))
+done
+echo ""
+echo "Zone install done."
