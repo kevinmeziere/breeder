@@ -7,4 +7,4 @@
 /opt/local/bin/pkgin -y install fifo-snarl
 /opt/local/bin/pkgin -yf ug
 
-/opt/local/bin/sm-prepare-image
+/opt/local/bin/sm-prepare-image -y
