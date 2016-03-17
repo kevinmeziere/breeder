@@ -1,6 +1,9 @@
 # To use:
 # curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/create-zone.sh | bash -s "10.10.10.10" "10.10.10.1" "255.255.255.0"
 # curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/create-zone.sh?$(date -R | awk '{print $5}' | sed 's/\://g') | bash -s "DHCP"
+# cleanup with: vmadm list | grep fifo-build | awk {'print $1'} | xargs -n 1 vmadm delete
+
+
 
 InstallerZoneIP=$(echo $1 | tr '[:lower:]' '[:upper:]')
 InstallerZoneGW=$2
