@@ -9,7 +9,7 @@
  "quota": "10",
  "customer_metadata": {
 	    "user-script" : "/opt/local/bin/echo TEST > /root/test "
- }
+ },
  "resolvers": ["8.8.8.8", "8.8.4.4"],
  "nics": [
 		{
