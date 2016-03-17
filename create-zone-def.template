@@ -8,7 +8,7 @@
  "alias": "fifo-build",
  "quota": "10",
  "customer_metadata": {
-	    "user-script" : "curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/snarl-install.sh | /usr/bin/bash"
+	    "user-script" : "/usr/bin/curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/snarl-install.sh | /usr/bin/bash"
  },
  "resolvers": ["8.8.8.8", "8.8.4.4"],
  "nics": [
