@@ -69,4 +69,7 @@ echo "/etc/motd.sh" >> /zones/$VMUUID/root/etc/profile
 echo "Creating Image"
 imgadm create -i -c bzip2 $VMUUID name=fifo-$PackageName version=$PackageVersion -o /var/tmp
 
+echo "Cleaning Up"
+vmadm delete $VMUUID
+
 echo "Done!"
