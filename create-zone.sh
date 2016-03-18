@@ -66,6 +66,9 @@ echo "" > /zones/$VMUUID/root/etc/motd
 
 echo "/etc/motd.sh" >> /zones/$VMUUID/root/etc/profile
 
+echo "Cleaning Image"
+rm /zones/$VMUUID/root/opt/log
+
 echo "Creating Image"
 imgadm create -i -c bzip2 $VMUUID name=fifo-$PackageName version=$PackageVersion -o /var/tmp
 
