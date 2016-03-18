@@ -8,7 +8,7 @@ curl https://project-fifo.net/fifo.gpg > /root/fifo.gpg
 gpg --primary-keyring /opt/local/etc/gnupg/pkgsrc.gpg --import < /root/fifo.gpg
 echo "http://release.project-fifo.net/pkg/rel" >> /opt/local/etc/pkgin/repositories.conf
 pkgin -fy up
-pkgin -y install fifo-snarl
+pkgin -y install fifo-snarl fifo-sniffle fifo-howl fifo-cerberus
 pkgin -yf ug
 pkgin clean
 

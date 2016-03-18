@@ -54,6 +54,7 @@ do
 done
 
 echo -en "\nZone install done.\n"
+echo "Sideloading files."
 
 
 imgadm create -i -c bzip2 $VMUUID name=fifo-$PackageName version=$PackageVersion -o /var/tmp
