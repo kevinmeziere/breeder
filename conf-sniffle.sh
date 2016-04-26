@@ -10,11 +10,12 @@ mkdir -p /data/sniffle/log/sasl
 chown -R $USER:$GROUP /data/sniffle
 
 CONFFILE=/data/sniffle/etc/sniffle.conf
-cp /opt/local/fifo-sniffle/etc/sniffle.conf.example ${CONFFILE}.example
+CONFEXAMPLE=/opt/local/fifo-sniffle/etc/sniffle.conf.example
+
 if [ ! -f "${CONFFILE}" ]
 then
     echo "Creating new configuration from example file."
-    cp ${CONFFILE}.example ${CONFFILE}
+    cp ${CONFEXAMPLE} ${CONFFILE}
     $SED -i bak -e "s/127.0.0.1/${IP}/g" ${CONFFILE}
 else
         printf "${BOLD}Please make sure you update your Sniffle config according to the update manual!${NC}\n"
