@@ -40,6 +40,8 @@ echo -en "Sleeping for zone to finish install"
 
 x=0
 
+unset -e
+
 while [ $(vmadm get $VMUUID | json state) != "stopped" ]
 do
 	if [ $x -ge 4 ]
@@ -53,6 +55,7 @@ do
 	echo -n "."
 	((x++))
 done
+set -e
 
 echo -en "\nZone install done.\n"
 echo "Sideloading files."
