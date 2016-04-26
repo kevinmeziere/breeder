@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/opt/local/bin/python
 
 import urllib2
 import xml.etree.ElementTree as ET
