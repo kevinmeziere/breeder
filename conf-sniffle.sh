@@ -3,8 +3,7 @@
 #
 USER=sniffle
 GROUP=$USER
-echo Configuring Sniffle
-echo Creating directories ...
+echo Configuring Sniffle...
 mkdir -p /data/sniffle/db/ring
 mkdir -p /data/sniffle/etc
 mkdir -p /data/sniffle/log/sasl

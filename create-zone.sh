@@ -60,21 +60,21 @@ set -e
 echo -en "\nZone install done.\n"
 echo "Sideloading files."
 
-curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-base.sh > /zones/$VMUUID/root/opt/local/bin/fifo-config
+curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-base.sh > /zones/$VMUUID/root/opt/local/bin/fifo-config
 case $PackageName in
 	aio)
-		curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-snarl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
-		curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-sniffle.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
-		curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-howl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-snarl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-sniffle.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-howl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
 		;;
 	snarl)
-		curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-snarl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-snarl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
 		;;
 	sniffle)
-		curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-sniffle.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-sniffle.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
 		;;
 	howl)
-		curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-howl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-howl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
 		;;
 esac
 chmod +x /zones/$VMUUID/root/opt/local/bin/fifo-config

@@ -3,8 +3,7 @@
 #
 USER=snarl
 GROUP=$USER
-echo Configuring Snarl
-echo Creating directories ...
+echo Configuring Snarl...
 mkdir -p /data/snarl/db/ring
 mkdir -p /data/snarl/etc
 mkdir -p /data/snarl/log/sasl

@@ -6,7 +6,7 @@ SSL_EMAIL="admin@fifo.cloud"
 
 ## End user configurable variables
 
-LOCAL_INFO=$($CURL ipinfo.io)
+LOCAL_INFO=$($CURL -s ipinfo.io)
 
 
 CERT_SUBJ="
@@ -23,7 +23,7 @@ emailAddress=$(echo SSL_EMAIL)
 # Howl
 #
 
-echo Configuring Howl
+echo Configuring Howl...
 
 USER=howl
 GROUP=$USER
@@ -34,7 +34,6 @@ CERTDIR="/data/fifo"
 CERTPREFIX="fifo"
 DAYS=3650
 
-echo Creating directories ...
 mkdir -p /data/howl/db/ring
 mkdir -p /data/howl/etc
 mkdir -p /data/howl/log/sasl
