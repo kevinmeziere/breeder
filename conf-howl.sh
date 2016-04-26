@@ -44,13 +44,8 @@ chown -R $USER:$GROUP /data/howl
 if [ ! -d $CERTDIR ]
 then
     echo "Generating self signed SSL cert in $CERTDIR"
-    #echo Trying to guess network configuration ...
-
-
-
 
     export PASSPHRASE=$(head -c 128 /dev/random  | uuencode - | grep -v "^end" | tr "\n" "d")
-    echo "Creating certificates"
     mkdir -p $CERTDIR
 
     openssl genrsa -des3 -out $CERTDIR/$CERTPREFIX.key -passout env:PASSPHRASE 2048
@@ -97,5 +92,5 @@ then
     cp ${CONFFILE}.example ${CONFFILE}
     $SED -i bak -e "s/127.0.0.1/${IP}/g" ${CONFFILE}
 else
-    echo "Please make sure you update your config according to the update manual!"
+    printf "${BOLD}Please make sure you update your Howl config according to the update manual!${NC}\n"
 fi

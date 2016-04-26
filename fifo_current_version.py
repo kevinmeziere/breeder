@@ -1,5 +1,3 @@
-#!/opt/local/bin/python
-
 import urllib2
 import xml.etree.ElementTree as ET
 from distutils.version import LooseVersion, StrictVersion

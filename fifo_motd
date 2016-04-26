@@ -2,35 +2,34 @@
 
 RED='\033[0;31m'
 GRN='\033[0;32m'
+BOLD='\033[1m'
 NC='\033[0m'
-
 # Check current versions
 status (){
 
-	printf "\033[1mService\t\t\tState\tInstalled\tAvailable\033[0m\n"
+        printf "${BOLD}%-15s%-15s%-25s%-25s${NC}\n" "Service" "State" "Installed" "Available"
 
-	SERVICE=$(svcs -H -oSVC,STATE sniffle howl snarl 2>/dev/null | awk '{print substr($0,index($0,"/")+1)}')
+        SERVICE=$(svcs -H -oSVC,STATE sniffle howl snarl 2>/dev/null | awk '{print substr($0,index($0,"/")+1)}')
 
-	current=$(/etc/fifo_current_version.py)
-	while read ASERVICE
-	do
+        current=$(/opt/local/bin/python /etc/fifo_current_version.py)
+        while read ASERVICE
+        do
 
-		PKG=$(echo "$ASERVICE" | awk '{print $1}')
-		version=$(cat /opt/local/fifo-${PKG}/releases/start_erl.data  | awk '{ print $2 }')
-		if [[ $current == *"pkg/rel/$version"* ]]
-			then
-			  printf "${ASERVICE}\t${GRN}${PKG}-${version}\t${version}${NC}\n"
-			else
-				needed=$(echo "${current}" | grep pkg/rel/fifo-${PKG})
-				printf "${ASERVICE}\t${RED}${PKG}-${version}\t${needed}${NC}\n"
-			fi
+                PKG=$(echo "$ASERVICE" | awk '{print $1}')
+                version=$(cat /opt/local/fifo-${PKG}/releases/start_erl.data  | awk '{ print $2 }')
+                if [[ $current == *"pkg/rel/fifo-${PKG}-$version"* ]]
+                        then
+                                printf "%-15s%-15s${GRN}%-25s%-25s${NC}\n" ${ASERVICE} "${PKG}-${version}" "${version}"
+                        else
+                                needed=$(echo "${current}" | grep pkg/rel/fifo-${PKG} | rev | cut -d- -f1 | rev)
+                                printf "%-15s%-15s${RED}%-25s%-25s${NC}\n" ${ASERVICE} "${PKG}-${version}" "${needed}"
+                        fi
 
-	done <<< "$SERVICE"
+        done <<< "$SERVICE"
 
 }
 
 #sed -e 's/#/'$(echo -e "\033")'[0;34m#'$(echo -e "\033")'[0m/g' -e 's/\*/'$(echo -e "\033")'[1;37m*'$(echo -e "\033")'[0m/g' cloud
-Info=$(status | column -t)
 cat <<EOF
     ____               _           __     _______ ______    
    / __ \_________    (_)__  _____/ /_   / ____(_) ____/___ 
@@ -39,4 +38,5 @@ cat <<EOF
 /_/   /_/   \____/_/ /\___/\___/\__/  /_/   /_/_/    \____/ 
                 /___/        Happy Hound
 EOF
-echo "$Info"
+
+status
