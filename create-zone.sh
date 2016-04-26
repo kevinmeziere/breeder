@@ -13,8 +13,8 @@ InstallerZoneMASK=$5
 
 
 imgadm update
-mkdir /opt/images
-mkdir /opt/zone_definitions
+[ -d /opt/images ] || mkdir /opt/images
+[ -d /opt/zone_definitions ] || mkdir /opt/zone_definitions
 imgadm import 1bd84670-055a-11e5-aaa2-0346bb21d5a1
 wget --no-check-certificate -O /opt/zone_definitions/ds_builder.json.tmp https://raw.githubusercontent.com/kevinmeziere/breeder/master/create-zone-def.template?$RANDOM
 
