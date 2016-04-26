@@ -1,0 +1,4 @@
+curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/create-zone.sh?$(date -R | awk '{print $5}' | sed 's/\://g') | bash -s "aio" "0.8.0"  "DHCP"
+curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/create-zone.sh?$(date -R | awk '{print $5}' | sed 's/\://g') | bash -s "howl" "0.8.0"  "DHCP"
+curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/create-zone.sh?$(date -R | awk '{print $5}' | sed 's/\://g') | bash -s "snarl" "0.8.0"  "DHCP"
+curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/create-zone.sh?$(date -R | awk '{print $5}' | sed 's/\://g') | bash -s "sniffle" "0.8.0"  "DHCP"
