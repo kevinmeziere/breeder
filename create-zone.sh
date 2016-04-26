@@ -1,8 +1,9 @@
 # To use:
 # curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/create-zone.sh | bash -s "aio" "0.8.0" "10.10.10.10" "10.10.10.1" "255.255.255.0"
-# curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/create-zone.sh?$(date -R | awk '{print $5}' | sed 's/\://g') | bash -s "DHCP"
+# curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/create-zone.sh?$(date -R | awk '{print $5}' | sed 's/\://g') | bash -s "aio" "0.8.0"  "DHCP"
 # cleanup with: vmadm list | grep breeder | awk {'print $1'} | xargs -n 1 vmadm delete
 
+set -e
 
 PackageName=$1
 PackageVersion=$2
