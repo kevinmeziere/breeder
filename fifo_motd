@@ -11,7 +11,7 @@ status (){
 
 	SERVICE=$(svcs -H -oSVC,STATE sniffle howl snarl 2>/dev/null | awk '{print substr($0,index($0,"/")+1)}')
 
-	current=$(/opt/local/bin/python /etc/current_versions.py)
+	current=$(/etc/fifo_current_version.py)
 	while read ASERVICE
 	do
 
@@ -31,7 +31,8 @@ status (){
 
 #sed -e 's/#/'$(echo -e "\033")'[0;34m#'$(echo -e "\033")'[0m/g' -e 's/\*/'$(echo -e "\033")'[1;37m*'$(echo -e "\033")'[0m/g' cloud
 Info=$(status | column -t)
-cat <<EOF    ____               _           __     _______ ______    
+cat <<EOF
+    ____               _           __     _______ ______    
    / __ \_________    (_)__  _____/ /_   / ____(_) ____/___ 
   / /_/ / ___/ __ \  / / _ \/ ___/ __/  / /_  / / /_  / __ \ 
  / ____/ /  / /_/ / / /  __/ /__/ /_   / __/ / / __/ / /_/ / 

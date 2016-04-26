@@ -1,5 +1,5 @@
 # To use:
-# curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/create-zone.sh | bash -s "10.10.10.10" "10.10.10.1" "255.255.255.0"
+# curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/create-zone.sh | bash -s "aio" "0.8.0" "10.10.10.10" "10.10.10.1" "255.255.255.0"
 # curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/create-zone.sh?$(date -R | awk '{print $5}' | sed 's/\://g') | bash -s "DHCP"
 # cleanup with: vmadm list | grep breeder | awk {'print $1'} | xargs -n 1 vmadm delete
 
@@ -56,15 +56,33 @@ done
 echo -en "\nZone install done.\n"
 echo "Sideloading files."
 
-curl https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/current_versions.py > /zones/$VMUUID/root/etc/current_versions.py
-chmod +x /zones/$VMUUID/root/etc/current_versions.py
+curl https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-base.sh > /zones/$VMUUID/usr/bin/fifo-config
+case $PackageName in
+	aio)
+		curl https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-snarl.sh >> /zones/$VMUUID/usr/bin/fifo-config
+		curl https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-sniffle.sh >> /zones/$VMUUID/usr/bin/fifo-config
+		curl https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-howl.sh >> /zones/$VMUUID/usr/bin/fifo-config
+		;;
+	snarl)
+		curl https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-snarl.sh >> /zones/$VMUUID/usr/bin/fifo-config
+		;;
+	sniffle)
+		curl https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-sniffle.sh >> /zones/$VMUUID/usr/bin/fifo-config
+		;;
+	howl)
+		curl https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/conf-howl.sh >> /zones/$VMUUID/usr/bin/fifo-config
+		;;
+esac
+chmod +x /zones/$VMUUID/usr/bin/fifo-config
 
+curl https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/fifo_current_version.py > /zones/$VMUUID/root/etc/fifo_current_version.py
+chmod +x /zones/$VMUUID/root/etc/fifo_current_version.py
 
-curl https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/motd > /zones/$VMUUID/root/etc/motd.sh
-chmod +x /zones/$VMUUID/root/etc/motd.sh
+curl https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/fifo_motd > /zones/$VMUUID/root/etc/fifo_motd.sh
+chmod +x /zones/$VMUUID/root/etc/fifo_motd.sh
 echo "" > /zones/$VMUUID/root/etc/motd
 
-echo "/etc/motd.sh" >> /zones/$VMUUID/root/etc/profile
+echo "/etc/fifo_motd.sh" >> /zones/$VMUUID/root/etc/profile
 
 echo "Cleaning Image"
 rm /zones/$VMUUID/root/opt/log
