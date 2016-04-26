@@ -40,7 +40,7 @@ echo -en "Sleeping for zone to finish install"
 
 x=0
 
-unset -e
+set +e
 
 while [ $(vmadm get $VMUUID | json state) != "stopped" ]
 do
