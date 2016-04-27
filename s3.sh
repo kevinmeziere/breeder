@@ -6,7 +6,7 @@
 file=$1
 dest=$2
 bucket=datasets.project-fifo.net
-resource="/${bucket}/${file}"
+resource="/${bucket}/${dest}"
 contentType=$3
 dateValue=`date -R`
 stringToSign="PUT\n\n${contentType}\n${dateValue}\n${resource}"
