@@ -16,4 +16,4 @@ curl -k -X PUT -T "${file}" \
   -H "Date: ${dateValue}" \
   -H "Content-Type: ${contentType}" \
   -H "Authorization: AWS ${s3Key}:${signature}" \
-  https://${bucket}.s3.amazonaws.com/${file}
+  https://${bucket}.s3.amazonaws.com/${dest}
