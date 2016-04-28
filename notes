@@ -1,0 +1,43 @@
+notes: 
+#In GZ:
+imgadm sources -a datasets.project-fifo.net
+imgadm import 8e5241d1-2b68-4962-bf86-ea64862eada5
+
+#
+vmadm create -f fifo.json
+
+{
+ "autoboot": true,
+ "brand": "joyent",
+ "image_uuid": "8e5241d1-2b68-4962-bf86-ea64862eada5",
+ "delegate_dataset": true,
+ "max_physical_memory": 3072,
+ "cpu_cap": 100,
+ "alias": "fifo-aioTest",
+ "quota": "40",
+ "resolvers": [
+  "8.8.8.8",
+  "8.8.4.4"
+ ],
+ "nics": [
+  {
+   "interface": "net0",
+   "nic_tag": "admin",
+   "ip": "dhcp"
+  }
+ ]
+}
+
+
+#In Zone:
+
+zfs set mountpoint=/data zones/$(sysinfo | json UUID)/data
+fifo-config
+svcadm enable epmd
+svcadm enable snarl
+svcadm enable howl
+svcadm enable sniffle
+
+ snarl-admin init default MyOrg Users admin admin
+
+#Done
