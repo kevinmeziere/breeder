@@ -91,5 +91,5 @@ then
     cp ${CONFEXAMPLE} ${CONFFILE}
     $SED -i bak -e "s/127.0.0.1/${IP}/g" ${CONFFILE}
 else
-    printf "${BOLD}Please make sure you update your Howl config according to the update manual!${NC}\n"
+    printf "Please make sure you update your Howl config according to the update manual!\n"
 fi

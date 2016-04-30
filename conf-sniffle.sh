@@ -18,5 +18,5 @@ then
     cp ${CONFEXAMPLE} ${CONFFILE}
     $SED -i bak -e "s/127.0.0.1/${IP}/g" ${CONFFILE}
 else
-        printf "${BOLD}*****************************************************************\nSniffle requires config changes. Read the Docs!\nhttps://docs.project-fifo.net/docs/upgrading-fifo#section-0-8-1\n*****************************************************************${NC}"
+    printf "${RED}*****************************************************************\nSniffle requires config changes. Read the Docs!\nhttps://docs.project-fifo.net/docs/upgrading-fifo#section-0-8-1\n*****************************************************************${NC}\n"
 fi
