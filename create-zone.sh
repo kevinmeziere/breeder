@@ -90,6 +90,7 @@ echo "/etc/fifo_motd.sh" >> /zones/$VMUUID/root/etc/profile
 
 echo "Cleaning Image"
 rm /zones/$VMUUID/root/opt/log
+rm /zones/$VMUUID/root/root/fifo.gpg
 
 echo "Creating Image"
 imgadm create -i -c bzip2 $VMUUID name=fifo-$PackageName version=$PackageVersion -o /var/tmp
