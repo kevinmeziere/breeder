@@ -1,15 +1,22 @@
 notes: 
-#In GZ:
-imgadm sources -a datasets.project-fifo.net
-imgadm import 8e5241d1-2b68-4962-bf86-ea64862eada5
 
-#
+#In GZ:
+
+#HTTPS is now enabled so you should delete the http entry:
+imgadm sources -d datasets.project-fifo.net
+#And add the https one:
+imgadm sources -a https://datasets.project-fifo.net
+
+#import the 0.8.1 dataset
+imgadm import fbe24046-b67b-4be3-923f-cd8d2cd58fe2
+
+# New Installs
 vmadm create -f fifo.json
 
 {
  "autoboot": true,
  "brand": "joyent",
- "image_uuid": "8e5241d1-2b68-4962-bf86-ea64862eada5",
+ "image_uuid": "fbe24046-b67b-4be3-923f-cd8d2cd58fe2",
  "delegate_dataset": true,
  "max_physical_memory": 3072,
  "cpu_cap": 100,
@@ -41,3 +48,16 @@ svcadm enable sniffle
  snarl-admin init default MyOrg Users admin admin
 
 #Done
+
+
+
+# Upgrades
+#Reprovision your fifo zone:
+echo '{ "image_uuid": "fbe24046-b67b-4be3-923f-cd8d2cd58fe2"}' |vmadm reprovision FIFO_ZONE_UUID
+
+#In Zone (zlogin... )
+fifo-config
+svcadm enable epmd
+svcadm enable snarl
+svcadm enable howl
+svcadm enable sniffle
