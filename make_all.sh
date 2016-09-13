@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-VER="0.8.2"
+VER="0.8.3"
 
 cd /var/tmp
 curl -s -k -O https://raw.githubusercontent.com/kevinmeziere/breeder/${VER}/s3.sh
