@@ -16,5 +16,8 @@ fail_if_error() {
     }
 }
 
+echo Mounting filesystem ...
+zfs set mountpoint=/data zones/$(sysinfo | json UUID)/data
+
 echo Trying to IP guess configuration ...
 IP=$(ifconfig net0 | grep inet | /usr/bin/awk '{print $2}')
