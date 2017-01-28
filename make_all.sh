@@ -2,8 +2,6 @@
 VER="0.9.0"
 
 cd /var/tmp
-curl -s -k -O https://raw.githubusercontent.com/project-fifo/breeder/${VER}/s3.sh
-chmod +x s3.sh
 
 curl -s -k -O https://raw.githubusercontent.com/project-fifo/breeder/${VER}/dsindex.sh
 chmod +x dsindex.sh
