@@ -4,34 +4,63 @@ RED='\033[0;31m'
 GRN='\033[0;32m'
 BOLD='\033[1m'
 NC='\033[0m'
+NL=$'\n'
+
+TMPFILE=$(mktemp)
+PREFIX=$(cat /opt/local/etc/pkgin/repositories.conf | grep fifo | awk '{split($0,a,"/"); print a[4]"%2F"a[5]"%2F"a[6]}')
+curl -s -o $TMPFILE  http://release.project-fifo.net?prefix=$PREFIX
+
+read_dom () {
+    local IFS=\>
+    read -d \< ENTITY CONTENT
+}
+
+s3_files (){
+while read_dom; do
+    if [[ $ENTITY = "Key" ]] ; then
+        echo $CONTENT
+    fi
+done < $TMPFILE
+}
+
+current_version (){
+    pkgin list | grep $1 | awk '{print $1}' | rev | cut -d- -f1 | rev
+    #pkgin list | grep $1 | rev | cut -d- -f1 | rev | awk '{print $1}'
+}
+
+avail_version (){
+
+    basename $( s3_files | sort -V | grep $1 | tail -n1 | rev | cut -d- -f1 | rev) .tgz
+}
+
 # Check current versions
 status (){
 
-        printf "${BOLD}%-15s%-15s%-25s%-25s${NC}\n" "Service" "State" "Installed" "Available"
+        printf "${BOLD}%-12s%-9s%-29s %-29s${NC}\n" "Service" "State" "Installed" "Available"
 
         SERVICE=$(svcs -H -oSVC,STATE sniffle howl snarl 2>/dev/null | awk '{print substr($0,index($0,"/")+1)}')
-
-        current=$(/opt/local/bin/python /etc/fifo_current_version.py)
+	if [ -d /opt/local/fifo-cerberus ]
+        then
+            SERVICE="${SERVICE}${NL}cerberus -"
+        fi
         while read ASERVICE
         do
-
-                PKG=$(echo "$ASERVICE" | awk '{print $1}')
-                version=$(cat /opt/local/fifo-${PKG}/releases/start_erl.data  | awk '{ print $2 }')
-                if [[ $current == *"pkg/rel/fifo-${PKG}-$version"* ]]
+		
+                pkg=$(echo "$ASERVICE" | awk '{print $1}')
+                version=$(current_version $pkg)
+		avail=$(avail_version $pkg)
+		# version=$(cat /opt/local/fifo-${PKG}/releases/start_erl.data  | awk '{ print $2 }')
+                if [[ $version == $avail ]]
                         then
-                                printf "%-15s%-15s${GRN}%-25s%-25s${NC}\n" ${ASERVICE} "${PKG}-${version}" "${version}"
+                                printf "%-12s%-9s${GRN}%-29.26s %-29.26s${NC}\n" ${ASERVICE} "${version}" "${version}"
                         else
-                                needed=$(echo "${current}" | grep pkg/rel/fifo-${PKG} | rev | cut -d- -f1 | rev)
-                                printf "%-15s%-15s${RED}%-25s%-25s${NC}\n" ${ASERVICE} "${PKG}-${version}" "${needed}"
+                                printf "%-12s%-9s${RED}%-29.26s %-29.26s${NC}\n" ${ASERVICE} "${version}" "${avail}"
                         fi
 
         done <<< "$SERVICE"
 
 }
 
-#sed -e 's/#/'$(echo -e "\033")'[0;34m#'$(echo -e "\033")'[0m/g' -e 's/\*/'$(echo -e "\033")'[1;37m*'$(echo -e "\033")'[0m/g' cloud
-cat <<EOF
-Project-FiFo - Spiffy Spitz (0.8.3)
-EOF
-
+echo "Project-FiFo - Clambering Corgi (0.9.0)"
 status
+rm $TMPFILE

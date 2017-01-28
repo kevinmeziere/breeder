@@ -1,6 +1,6 @@
 # To use:
-# curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/create-zone.sh | bash -s "aio" "0.8.0" "10.10.10.10" "10.10.10.1" "255.255.255.0"
-# curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/create-zone.sh?$(date -R | awk '{print $5}' | sed 's/\://g') | bash -s "aio" "0.8.0"  "DHCP"
+# curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/create-zone.sh | bash -s "aio" "0.9.0" "10.10.10.10" "10.10.10.1" "255.255.255.0"
+# curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/master/create-zone.sh?$(date -R | awk '{print $5}' | sed 's/\://g') | bash -s "aio" "0.9.0"  "DHCP"
 # cleanup with: vmadm list | grep breeder | awk {'print $1'} | xargs -n 1 vmadm delete
 
 set -e
@@ -15,7 +15,7 @@ InstallerZoneMASK=$5
 imgadm update
 [ -d /opt/images ] || mkdir /opt/images
 [ -d /opt/zone_definitions ] || mkdir /opt/zone_definitions
-imgadm import 1bd84670-055a-11e5-aaa2-0346bb21d5a1
+imgadm import e1faace4-e19b-11e5-928b-83849e2fd94a
 wget --no-check-certificate -O /opt/zone_definitions/ds_builder.json.tmp https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.0/create-zone-def.template?$RANDOM
 
 if [ "$InstallerZoneIP" = "DHCP" ]
@@ -60,29 +60,26 @@ set -e
 echo -en "\nZone install done.\n"
 echo "Sideloading files."
 
-curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.3/conf-base.sh > /zones/$VMUUID/root/opt/local/bin/fifo-config
+curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.9.0/conf-base.sh > /zones/$VMUUID/root/opt/local/bin/fifo-config
 case $PackageName in
 	aio)
-		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.3/conf-snarl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
-		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.3/conf-sniffle.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
-		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.3/conf-howl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.9.0/conf-snarl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.9.0/conf-sniffle.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.9.0/conf-howl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
 		;;
 	snarl)
-		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.3/conf-snarl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.9.0/conf-snarl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
 		;;
 	sniffle)
-		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.3/conf-sniffle.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.9.0/conf-sniffle.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
 		;;
 	howl)
-		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.3/conf-howl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
+		curl -s -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.9.0/conf-howl.sh >> /zones/$VMUUID/root/opt/local/bin/fifo-config
 		;;
 esac
 chmod +x /zones/$VMUUID/root/opt/local/bin/fifo-config
 
-curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.3/fifo_current_version.py > /zones/$VMUUID/root/etc/fifo_current_version.py
-chmod +x /zones/$VMUUID/root/etc/fifo_current_version.py
-
-curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.8.3/fifo_motd > /zones/$VMUUID/root/etc/fifo_motd.sh
+curl -k https://raw.githubusercontent.com/kevinmeziere/breeder/0.9.0/fifo_motd > /zones/$VMUUID/root/etc/fifo_motd.sh
 chmod +x /zones/$VMUUID/root/etc/fifo_motd.sh
 echo "" > /zones/$VMUUID/root/etc/motd
 
