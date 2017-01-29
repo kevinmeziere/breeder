@@ -24,13 +24,13 @@ done < $TMPFILE
 }
 
 current_version (){
-    pkgin list | grep $1 | awk '{print $1}' | rev | cut -d- -f1 | rev
+    /opt/local/bin/pkgin list | grep $1 | awk '{print $1}' | rev | cut -d- -f1 | rev
     #pkgin list | grep $1 | rev | cut -d- -f1 | rev | awk '{print $1}'
 }
 
 avail_version (){
 
-    basename $( s3_files | sort -V | grep $1 | tail -n1 | rev | cut -d- -f1 | rev) .tgz
+    basename $( s3_files | /opt/local/bin/sort -V | grep $1 | tail -n1 | rev | cut -d- -f1 | rev) .tgz
 }
 
 # Check current versions
