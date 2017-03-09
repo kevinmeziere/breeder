@@ -8,7 +8,7 @@
  "alias": "breeder-{{PACKAGENAME}}",
  "quota": "10",
  "customer_metadata": {
-	    "user-script" : "/usr/bin/curl -k https://raw.githubusercontent.com/project-fifo/breeder/0.9.0/install-{{PACKAGENAME}}.sh?$(/usr/bin/date -R | /usr/bin/awk '{print $5}' | /usr/bin/sed 's/\\://g') | /usr/bin/bash -s \"{{PACKAGEVER}}\" > /opt/log 2>&1"
+	    "user-script" : "/usr/bin/curl -k https://raw.githubusercontent.com/project-fifo/breeder/0.9.1/install-{{PACKAGENAME}}.sh?$(/usr/bin/date -R | /usr/bin/awk '{print $5}' | /usr/bin/sed 's/\\://g') | /usr/bin/bash -s \"{{PACKAGEVER}}\" > /opt/log 2>&1"
  },
  "resolvers": ["8.8.8.8", "8.8.4.4"],
  "nics": [

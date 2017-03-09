@@ -61,6 +61,6 @@ status (){
 
 }
 
-echo "Project-FiFo - Clambering Corgi (0.9.0)"
+echo "Project-FiFo - 0.9.1"
 status
 rm $TMPFILE
