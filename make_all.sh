@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-VER="0.9.0"
+VER="0.9.1"
 
 cd /var/tmp
 
