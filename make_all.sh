@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 VER="0.9.1"
 
+svcadm disable chunter
+
 cd /var/tmp
 
 for PKG in aio howl snarl sniffle 
