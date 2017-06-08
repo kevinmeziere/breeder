@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-VER="0.9.1"
+VER="0.9.2"
 
 svcadm disable chunter
 
