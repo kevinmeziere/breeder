@@ -50,7 +50,7 @@ do
 		echo -en "\033[2K\r"
 		echo -en "Sleeping for zone to finish install"
 	fi
-
+	rm -rf /zones/$VMUUID/root/.zonecontrol/metadata.sock
 	sleep 2
 	echo -n "."
 	((x++))
