@@ -25,10 +25,6 @@ else
   sed "s/{{PACKAGENAME}}/$PackageName/g;s/{{PACKAGEVER}}/$PackageVersion/g;s/{{IP}}/$InstallerZoneIP/g;s/{{GW}}/$InstallerZoneGW/g;s/{{MASK}}/$InstallerZoneMASK/g" /opt/zone_definitions/ds_builder.json.tmp > /opt/zone_definitions/ds_builder.json
 fi
 
-echo "Temporary workaround for Joyen Smartos #300"
-wget --no-check-certificate -O /opt/zone_definitions/joyent-minimal-platform.xml https://raw.githubusercontent.com/project-fifo/breeder/0.9.2/joyent-minimal-platform.xml?$RANDOM
-mount -O -F lofs /opt/zone_definitions/joyent-minimal-platform.xml /usr/lib/brand/joyent-minimal/platform.xml
-
 
 echo "Creating temporary vm for installation..."
 

@@ -14,4 +14,6 @@ pkgin clean
 
 svcadm enable epmd
 
-sm-prepare-image -y
+awk '!/metadata\.sock/' /opt/local/bin/sm-prepare-image > /opt/local/bin/sm-prepare-image-mod
+chmod +x /opt/local/bin/sm-prepare-image-mod
+/opt/local/bin/sm-prepare-image-mod -y
